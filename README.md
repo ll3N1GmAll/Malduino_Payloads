@@ -15,4 +15,4 @@ The backdoor used in this payload is created by ATAT (Attack Team Automation Too
 The 'winmgnt' file name can be changed to fit any payload you wish to download and execute via PsExec on the target!
 
 
-# Keep EVERY line = or < 127 characters for Malduino compatibility!
+# Keep EVERY line in your payload scripts = or < 127 characters for Malduino compatibility!
