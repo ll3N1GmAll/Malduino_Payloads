@@ -16,3 +16,4 @@ The 'winmgnt' file name can be changed to fit any payload you wish to download a
 
 
 # Keep EVERY line in your payload scripts = or < 127 characters for Malduino compatibility!
+(Its actually 128 characters; but I say 127 cuz why push the envelope of stability?!)
